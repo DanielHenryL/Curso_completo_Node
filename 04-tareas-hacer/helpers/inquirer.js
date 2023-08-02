@@ -10,48 +10,49 @@ const preguntas = [
         choices: [
             {
                 value: '1',
-                name: '1. Crear tarea'
+                name: `${'1.'.green} Crear tarea`
             },
             {
                 value: '2',
-                name: '2. Listar tarea'
+                name: `${'2.'.green} Listar tarea`
             },
             {
                 value: '3',
-                name: '3. Listar tareas completadas'
+                name: `${'3.'.green} Listar tareas completadas`
             },
             {
                 value: '4',
-                name: '4. Listar tareas pendientes'
+                name: `${'4.'.green} Listar tareas pendientes`
             },
             {
                 value: '5',
-                name: '5. Completar tarea(s)'
+                name: `${'5.'.green} Completar tarea(s)`
             },
             {
                 value: '6',
-                name: '6. Borrar tarea'
+                name: `${'6.'.green} Borrar tarea`
             },
             {
                 value: '0',
-                name: '0. Salir'
+                name: `${'0.'.green} Salir`
             },
         ]
     }
 ]
 
-
+// Presenta el menu y pide una opcion
 const inquirerMenu = async( ) =>{
     console.clear();
 
     console.log( '===================================='.green );
-    console.log( '       Seleccione una opcion'.green );
+    console.log( '       Seleccione una opcion'.blue );
     console.log( '====================================\n'.green );
 
     const { opcion } = await inquirer.prompt(preguntas);
     return opcion;
 
 }
+// pausa el menu 
 const pausa = async() =>{
     const question = [
         {
@@ -63,6 +64,7 @@ const pausa = async() =>{
     console.log( '\n' )
     await inquirer.prompt(question);
 }
+// pide al usuario un 'message'
 const leerInput = async( message ) => {
     const question = [
         {
