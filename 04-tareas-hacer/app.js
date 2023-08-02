@@ -30,8 +30,14 @@ const main = async() =>{
             break;
             case '2':
                 // imprime las tareas
-                console.log( tareas.listadoArr );
+                tareas.listadoCompleto();
                 break;
+            case '3':
+                tareas.listarCompletadasPendientes();
+                break;
+            case '4':
+                tareas.listarCompletadasPendientes( false );
+
         }
         // guardar las tareas en bd
         guardarDB( tareas.listadoArr )

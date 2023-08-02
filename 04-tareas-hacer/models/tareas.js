@@ -1,3 +1,5 @@
+require('colors')
+
 const Tarea = require("./tarea");
 
 class Tareas {
@@ -26,6 +28,26 @@ class Tareas {
     crearTareas( desc='' ){
         const tarea = new Tarea( desc )
         this._listado[tarea.id] = tarea
+    }
+
+    listadoCompleto(){
+        console.log(); // para el salto de linea
+        // _listado es un objeto y poco manejable por eso se usa la propiedad listadoArr
+        this.listadoArr.forEach( ( { desc,completadoEn }, index) => {
+            const idx = `${ index + 1 }.`.green
+            console.log(`${ idx} ${ desc } :: ${ completadoEn ? 'Completada'.green:'Pendiente'.red }`)
+        } );
+    }
+
+    listarCompletadasPendientes( completadas = true ){
+        console.log(); // para el salto de linea
+        const completados = (completadas) 
+                            ? this.listadoArr.filter( tarea => tarea.completadoEn) 
+                            : this.listadoArr.filter( tarea => !tarea.completadoEn) 
+        completados.forEach( ( { desc, completadoEn }, index) => {
+            const idx = `${ index + 1 }.`.green
+            console.log(`${ idx} ${ desc } :: ${ completadoEn ? completadoEn:'Pendiente'.red }`)
+        } );
     }
 }
 
