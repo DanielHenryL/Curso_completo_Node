@@ -52,8 +52,22 @@ class Tareas {
                             : this.listadoArr.filter( tarea => !tarea.completadoEn) 
         completados.forEach( ( { desc, completadoEn }, index) => {
             const idx = `${ index + 1 }.`.green
-            console.log(`${ idx} ${ desc } :: ${ completadoEn ? completadoEn:'Pendiente'.red }`)
+            console.log(`${ idx} ${ desc } :: ${ completadoEn ? completadoEn.green:'Pendiente'.red }`)
         } );
+    }
+
+    toggleCompletadas( ids = [] ){
+        ids.forEach( id => {
+            if ( !this._listado[id].completadoEn ) {
+                this._listado[id].completadoEn = new Date().toISOString();
+            }
+        });
+
+        this.listadoArr.forEach( tarea => {
+            if ( !ids.includes(tarea.id) ) {
+                this._listado[tarea.id].completadoEn = null;
+            }
+        })
     }
 }
 
