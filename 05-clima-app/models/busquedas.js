@@ -23,8 +23,14 @@ class Busquedas{
                 params: this.paramsMapbox
             })
             const { data } = await intance.get();
-            console.log( data );
-            return [];
+            return data.features.map( lugar => {
+                return {
+                    id: lugar.id,
+                    nombre: lugar.place_name,
+                    lng: lugar.center[0],
+                    lat: lugar.center[1],
+                }
+            })
             
         } catch (error) {
             return [];
