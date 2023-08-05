@@ -78,7 +78,7 @@ const listadoLugares = async( lugares = [] ) =>{
     });
     // agregamos la opcion de cancelar 
     choices.unshift({
-        value:'0',
+        value: 0,
         name:'0. '.green + 'Cancelar',
     })
     // preparamos las preguntas     
