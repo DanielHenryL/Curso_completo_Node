@@ -1,3 +1,4 @@
+// En este archivo se crean la funcionalidad principal de la app
 const fs = require('fs')
 const axios = require('axios');
 
@@ -6,7 +7,7 @@ class Busquedas{
     historial = [];
     dbPath = './db/database.json';
     constructor(){
-
+        this.leerDB();
     }
 
     get paramsMapbox(){
@@ -16,6 +17,11 @@ class Busquedas{
             'language':'es',
         }
     }
+
+    get historialCapitalizado(){
+        return this.historial.map( lugar => lugar[0].toUpperCase() + lugar.substring(1))
+    }
+
     async ciudad( lugar = '' ){
         try {
             // peticion
@@ -67,9 +73,10 @@ class Busquedas{
 
     agregarHistorial( lugar = ''){
         if( !this.historial.includes( lugar.toLocaleLowerCase() )){
+            this.historial = this.historial.splice(0,5);
             this.historial.unshift( lugar.toLocaleLowerCase() );
+            this.guardarDB();
         }
-        this.guardarDB();
     }
 
     guardarDB(){
@@ -80,10 +87,14 @@ class Busquedas{
     }
 
     leerDB(){
+        if ( !fs.existsSync( this.dbPath )) return ;
         
+        const info = fs.readFileSync( this.dbPath, { encoding: 'utf8' } );
+        if (!info) return;
+
+        const { historial } = JSON.parse( info );
+        this.historial = historial ;
     }
-
-
 
 }
 

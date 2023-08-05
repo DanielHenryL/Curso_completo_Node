@@ -1,3 +1,4 @@
+// En este archivo es para mostrar la informacion del usuario y tambien para q el usuario mande informacion
 require('colors')
 const inquirer = require('inquirer')
 

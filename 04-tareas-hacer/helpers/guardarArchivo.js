@@ -9,6 +9,9 @@ const leerDB = () =>{
         return null;
     }
     const info = fs.readFileSync(archivo, { encoding:'utf8'})
+    if (!info) {
+        return;
+    }
     const data = JSON.parse(info)
     return data
 }
