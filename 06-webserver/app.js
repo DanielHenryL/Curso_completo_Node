@@ -9,7 +9,7 @@ app.use( express.static('public'))
 
 
 app.get('/hola-mundo', ( req, res ) => {
-    res.send('Hola mundo')
+    res.send('Hola mundo');
 })
 
 app.get('*', ( req, res ) => {
