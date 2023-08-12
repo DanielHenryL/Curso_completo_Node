@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
+
 
 class Server {
 
@@ -12,6 +14,8 @@ class Server {
         this.routes();
     }
     middlewares() {
+        // Cors
+        this.app.use( cors() );
         // directorio público
         this.app.use( express.static('public') );
         
