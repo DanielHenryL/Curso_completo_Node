@@ -11,8 +11,16 @@ const usuariosPut= ( req, res = response ) => {
     });
 }
 const usuariosPost= ( req, res = response ) => {
+
+    const { edad, nombre, apellido } = data
+    
     res.json({
-        msg: 'post API - controlador'
+        msg: 'post API - controlador',
+        usuario: {
+            nombre,
+            apellido,
+            edad
+        }
     });
 }
 const usuariosDelete= ( req, res = response ) => {
