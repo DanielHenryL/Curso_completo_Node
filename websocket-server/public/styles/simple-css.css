@@ -1,0 +1,10 @@
+
+
+.container{
+    width: 80%;
+    max-width: 100rem;
+    margin: 0 auto;
+}
+.container h1{
+    margin-left: 2rem;
+}
