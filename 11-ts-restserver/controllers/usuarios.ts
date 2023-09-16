@@ -53,18 +53,6 @@ export const putUsuario = async( req:Request, res:Response ) => {
     const { id } = req.params;
     const { body } = req;
     try {
-        
-        const existeEmail = await Usuario.findOne({
-            where:{
-                email: body.email
-            }
-        })
-
-        if ( existeEmail ) {
-            return res.status(400).json({
-                msg:`Ya exite el usuario con el email ${body.email}`
-            })
-        }
 
         const usuario = await Usuario.findByPk( id );
         if ( !usuario ) {
@@ -82,11 +70,20 @@ export const putUsuario = async( req:Request, res:Response ) => {
         })
     }
 }
-export const deleteUsuario = ( req:Request, res:Response ) => {
+export const deleteUsuario = async( req:Request, res:Response ) => {
     const { id } = req.params;
-    res.json({
-        msg:'deleteUsuario',
-        id
-    })
+    const usuario = await Usuario.findByPk( id );
+    if ( !usuario ) {
+        return res.status(404).json({
+            msg:`No existe el usuario con el id ${id}`
+        })
+    }
+    // Eliminacion logica de la BD
+    await usuario.update({estado:false});
+
+    // eliminar de forma fisica de la BD
+    // await usuario.destroy();
+
+    res.json(usuario);
 }
 
