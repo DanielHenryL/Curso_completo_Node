@@ -3,6 +3,7 @@ dotenv.config();
 import express, {Application} from 'express';
 import userRoutes from '../routes/usuario';
 import cors from 'cors';
+import db from '../db/connection';
 
 interface Path {
     usuarios:string
@@ -20,11 +21,23 @@ class Server{
         this.apiPath = {
             usuarios: '/api/usuarios'  
         }
+        // coneccion a la base de datos
+        this.dbConnection();
         // middleware de la aplicacion
         this.middleware();
         // Rutas de mi aplicacion
         this.routes();
     }
+
+    async dbConnection(){
+        try {
+            await db.authenticate();
+            console.log( 'Database online' );
+        } catch (error) {
+            throw new Error( error as string);
+        }
+    }
+
     middleware(){
         //Cors
         this.app.use( cors() );
@@ -36,8 +49,6 @@ class Server{
     routes(){
         this.app.use( this.apiPath.usuarios, userRoutes )
     }
-
-
 
     listen(){
         this.app.listen( this.port, () => {
